@@ -1,8 +1,8 @@
 <template>
-    <v-select :label="labelName" :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']">
+    <v-select :label="labelName" :items>
     </v-select>
 </template>
 
 <script setup>
-const props = defineProps(['labelName'])
+const props = defineProps(['labelName', 'items'])
 </script>

@@ -5,11 +5,11 @@
     </div>
     <v-main>
       <div class="d-flex flex-wrap">
-        <DropDown labelName="Area" />
-        <DropDown labelName="City" />
+        <DropDown labelName="Area" :items=areas />
+        <DropDown labelName="City" :items=cities />
         <SearchBox />
       </div>
-      <BranchesTable v-if=isMounted :data=branches />
+      <BranchesTable v-if=isMounted :branches />
       <div v-else class="d-flex justify-center">Loading...</div>
     </v-main>
   </v-app>
@@ -37,8 +37,5 @@ function updateValues(data) {
   cities.value = data.map((item) => { return item.city })
   areas.value = data.map((item) => { return item.store_region })
   isMounted.value = true
-  console.log(cities.value);
-  console.log(areas.value);
 }
-
 </script>
