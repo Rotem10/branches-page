@@ -29,9 +29,6 @@
             </tr>
         </tbody>
     </v-table>
-    <div>
-        {{ data }}
-    </div>
 </template>
 
 <script setup>
