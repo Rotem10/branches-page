@@ -37,13 +37,5 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    // proxy: {
-    //   '/app': {
-    //     target:
-    //       'https://mcdonalds-live-engage-api-stage-1.azurewebsites.net/stores.json',
-    //     changeOrigin: true,
-    //     secure: false,
-    //   },
-    // },
   },
 });

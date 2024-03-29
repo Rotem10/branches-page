@@ -5,18 +5,19 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 
-const res = async () => {
-  try {
-    return await axios.get(
-      'https://mcdonalds-live-engage-api-stage-1.azurewebsites.net/stores.json'
-    );
-  } catch (error) {
-    throw error;
-  }
-};
-
 app.get('/', (request, response) => {
-  response.send(res.data);
+  let data;
+  axios
+    .get(
+      'https://mcdonalds-live-engage-api-stage-1.azurewebsites.net/stores.json'
+    )
+    .then((getResponse) => {
+      data = getResponse.data;
+      response.send(data);
+    })
+    .catch(function (error) {
+      console.log('Error while fetching branches data', error);
+    });
 });
 
 app.listen(9000, () => {

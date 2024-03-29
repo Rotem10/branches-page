@@ -6,23 +6,25 @@
     <v-main>
       <FiltersContainer />
       <BranchesTable />
-      {{ branches }}
+      <div>
+        {{ branches }}
+      </div>
+
     </v-main>
   </v-app>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import axios from 'axios'
 import BranchesTable from './components/BranchesTable.vue'
 import FiltersContainer from './components/FiltersContainer.vue'
 
-const branches = ref(null)
+const branches = ref({})
 
-onMounted(async () => {
+onBeforeMount(async () => {
   const axiosResponse = await axios.get('http://localhost:9000/')
   branches.value = axiosResponse.data
-  console.log(branches);
 });
 
 </script>
