@@ -1,15 +1,15 @@
 <template>
   <v-app>
     <div class="d-flex justify-center bg-surface-variant">
-      <h1>Our BranchesTable</h1>
+      <h1>Our Branches</h1>
     </div>
     <v-main>
-      <FiltersContainer />
-      <BranchesTable />
-      <div>
-        {{ branches }}
+      <div class="d-flex flex-wrap">
+        <DropDown labelName="Area" />
+        <DropDown labelName="City" />
+        <SearchBox />
       </div>
-
+      <BranchesTable :data=branches />
     </v-main>
   </v-app>
 </template>
@@ -18,7 +18,9 @@
 import { ref, onBeforeMount } from 'vue'
 import axios from 'axios'
 import BranchesTable from './components/BranchesTable.vue'
-import FiltersContainer from './components/FiltersContainer.vue'
+import DropDown from './components/DropDown.vue';
+import SearchBox from './components/SearchBox.vue';
+// import FiltersContainer from './components/FiltersContainer.vue'
 
 const branches = ref({})
 
