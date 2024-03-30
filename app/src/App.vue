@@ -5,11 +5,11 @@
     </div>
     <v-main>
       <div class="d-flex flex-wrap">
-        <DropDown labelName="Area" :items=areas @selected="updateArea" />
-        <DropDown labelName="City" :items=cities @selected="updateCity" />
+        <DropDown labelName="Area" :items=areas @selected="filterByArea" />
+        <DropDown labelName="City" :items=cities @selected="filterByCity" />
         <SearchBox />
       </div>
-      <BranchesTable v-if=isMounted :branches />
+      <BranchesTable v-if=isMounted :branchesToDisplay />
       <div v-else class="d-flex justify-center">Loading...</div>
     </v-main>
   </v-app>
@@ -22,7 +22,8 @@ import BranchesTable from './components/BranchesTable.vue'
 import DropDown from './components/DropDown.vue';
 import SearchBox from './components/SearchBox.vue';
 
-const branches = ref([])
+let data = []
+const branchesToDisplay = ref([])
 const cities = ref([])
 const areas = ref([])
 const isMounted = ref(false)
@@ -32,20 +33,21 @@ onBeforeMount(async () => {
   updateValues(axiosResponse.data)
 });
 
-const updateValues = (data) => {
-  branches.value = data
+const updateValues = (resData) => {
+  data = resData
+  branchesToDisplay.value = data
   cities.value = Array.from(new Set(data.map((item) => { return item.city.trim() }))).sort()
   areas.value = Array.from(new Set(data.map((item) => { return item.store_region }))).sort((a, b) => a - b)
   isMounted.value = true
 }
 
-const updateArea = (area) => {
-
-  console.log(area);
+const filterByArea = (area) => {
+  const filteredBranches = data.filter((item) => item.store_region === area)
+  branchesToDisplay.value = filteredBranches
 }
-const updateCity = (city) => {
-
-  console.log(city);
+const filterByCity = (city) => {
+  const filteredBranches = data.filter((item) => item.city.trim() === city)
+  branchesToDisplay.value = filteredBranches
 }
 
 </script>

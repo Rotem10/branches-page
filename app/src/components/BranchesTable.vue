@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in branches" :key="item.store_id">
+            <tr v-for="item in branchesToDisplay" :key="item.store_id">
                 <td>{{ item.store_id }}</td>
                 <td>{{ item.store_title }}</td>
                 <td>{{ item.store_address }}</td>
@@ -32,5 +32,5 @@
 </template>
 
 <script setup>
-const props = defineProps(['branches'])
+const props = defineProps(['branchesToDisplay'])
 </script>
