@@ -17,36 +17,36 @@
 
 <script setup>
 import { ref, onBeforeMount } from 'vue'
-import axios from 'axios'
+import getData from './api/api.js'
 import BranchesTable from './components/BranchesTable.vue'
 import DropDown from './components/DropDown.vue';
 import SearchBox from './components/SearchBox.vue';
 
-let data = []
+let branches = []
 const branchesToDisplay = ref([])
 const cities = ref([])
 const areas = ref([])
 const isMounted = ref(false)
 
 onBeforeMount(async () => {
-  const axiosResponse = await axios.get('http://localhost:9000/')
-  updateValues(axiosResponse.data)
+  const data = await getData()
+  updateValues(data)
 });
 
-const updateValues = (resData) => {
-  data = resData
-  branchesToDisplay.value = data
-  cities.value = Array.from(new Set(data.map((item) => { return item.city.trim() }))).sort()
-  areas.value = Array.from(new Set(data.map((item) => { return item.store_region }))).sort((a, b) => a - b)
+const updateValues = (data) => {
+  branches = data
+  branchesToDisplay.value = branches
+  cities.value = Array.from(new Set(branches.map((item) => { return item.city.trim() }))).sort()
+  areas.value = Array.from(new Set(branches.map((item) => { return item.store_region }))).sort((a, b) => a - b)
   isMounted.value = true
 }
 
 const filterByArea = (area) => {
-  const filteredBranches = data.filter((item) => item.store_region === area)
+  const filteredBranches = branches.filter((item) => item.store_region === area)
   branchesToDisplay.value = filteredBranches
 }
 const filterByCity = (city) => {
-  const filteredBranches = data.filter((item) => item.city.trim() === city)
+  const filteredBranches = branches.filter((item) => item.city.trim() === city)
   branchesToDisplay.value = filteredBranches
 }
 
