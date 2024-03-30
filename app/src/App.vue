@@ -34,8 +34,8 @@ onBeforeMount(async () => {
 
 function updateValues(data) {
   branches.value = data
-  cities.value = data.map((item) => { return item.city })
-  areas.value = data.map((item) => { return item.store_region })
+  cities.value = Array.from(new Set(data.map((item) => { return item.city.trim() }))).sort()
+  areas.value = Array.from(new Set(data.map((item) => { return item.store_region }))).sort((a, b) => a - b)
   isMounted.value = true
 }
 </script>
