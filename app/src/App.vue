@@ -5,8 +5,8 @@
     </div>
     <v-main>
       <div class="d-flex flex-wrap">
-        <DropDown labelName="Area" :items=areas />
-        <DropDown labelName="City" :items=cities />
+        <DropDown labelName="Area" :items=areas @selected="updateArea" />
+        <DropDown labelName="City" :items=cities @selected="updateCity" />
         <SearchBox />
       </div>
       <BranchesTable v-if=isMounted :branches />
@@ -32,10 +32,20 @@ onBeforeMount(async () => {
   updateValues(axiosResponse.data)
 });
 
-function updateValues(data) {
+const updateValues = (data) => {
   branches.value = data
   cities.value = Array.from(new Set(data.map((item) => { return item.city.trim() }))).sort()
   areas.value = Array.from(new Set(data.map((item) => { return item.store_region }))).sort((a, b) => a - b)
   isMounted.value = true
 }
+
+const updateArea = (area) => {
+
+  console.log(area);
+}
+const updateCity = (city) => {
+
+  console.log(city);
+}
+
 </script>
