@@ -5,4 +5,5 @@
 
 <script setup>
 defineEmits(['inputText'])
+const text = defineModel()
 </script>
