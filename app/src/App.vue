@@ -10,7 +10,9 @@
         <SearchBox />
       </div>
       <BranchesTable v-if=isMounted :branchesToDisplay />
-      <div v-else class="d-flex justify-center">Loading...</div>
+      <div v-else class="d-flex justify-center">
+        <v-progress-circular indeterminate></v-progress-circular>
+      </div>
     </v-main>
   </v-app>
 </template>
