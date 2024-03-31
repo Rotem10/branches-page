@@ -7,7 +7,7 @@
       <div class="d-flex flex-wrap">
         <DropDown labelName="Area" :items=areas @selected="filterByArea" />
         <DropDown labelName="City" :items=cities @selected="filterByCity" />
-        <SearchBox />
+        <SearchBox @input-text="filterByText" />
       </div>
       <BranchesTable v-if=isMounted :branchesToDisplay />
       <div v-else class="d-flex justify-center">
@@ -49,6 +49,13 @@ const filterByArea = (area) => {
 }
 const filterByCity = (city) => {
   const filteredBranches = branches.filter((item) => item.city.trim() === city)
+  branchesToDisplay.value = filteredBranches
+}
+
+const filterByText = (text) => {
+  const filteredBranches = branches.filter((item) => {
+    return `${item.store_region}`.includes(text) || item.city.trim().includes(text)
+  })
   branchesToDisplay.value = filteredBranches
 }
 

@@ -6,5 +6,4 @@
 <script setup>
 const props = defineProps(['labelName', 'items'])
 defineEmits(['selected'])
-
 </script>
